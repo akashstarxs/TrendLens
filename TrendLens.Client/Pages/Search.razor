@@ -1,0 +1,77 @@
+﻿@page "/"
+@using TrendLens.Client.ApiHandles
+
+@inject ApiManager ApiManager
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="text-center mb-4">
+                <h2 class="custom-heading">Content Virality Predictor</h2>
+                <p class="lead text-muted">Enter a hashtag or keyword to predict its virality.</p>
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Enter hashtag or keyword" @bind="searchQuery" />
+                <div class="input-group-append">
+                    <button class="btn btn-primary" @onclick="PerformSearch">Search</button>
+                </div>
+            </div>
+
+            @if (isLoading)
+            {
+                <div class="text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            }
+            else if (searchResults != null)
+            {
+                <div class="mt-4">
+                    <h4>Results for: <strong>@searchQuery</strong></h4>
+                    <ul class="list-group">
+                        @foreach (var entry in searchResults)
+                        {
+                            <li class="list-group-item">
+                                <strong>@entry.Key: yyyy-MM-dd</strong> - @entry.Value posts
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private string searchQuery;
+    private Dictionary<DateTime, int> searchResults;
+    private bool isLoading;
+
+    private async Task PerformSearch()
+    {
+        isLoading = true;
+        try
+        {
+            // Call the ApiManager to fetch data from Reddit
+            searchResults = await ApiManager.GetRedditPostCountsAsync(searchQuery);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error during search: {ex.Message}");
+            searchResults = null;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+        if(searchResults!=null)
+        {
+            foreach (var entry in searchResults)
+            {
+                Console.WriteLine($"{entry.Key}: {entry.Value}");
+            }
+        }
+    }
+}

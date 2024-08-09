@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrendLens", "TrendLens\TrendLens.csproj", "{3C1675C6-2ED4-4DD7-9210-2E4D74F9CA3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrendLens.Client", "TrendLens.Client\TrendLens.Client.csproj", "{9DCA6CFE-B16E-4B78-BD8F-43D4B5F8BA10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C1675C6-2ED4-4DD7-9210-2E4D74F9CA3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C1675C6-2ED4-4DD7-9210-2E4D74F9CA3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C1675C6-2ED4-4DD7-9210-2E4D74F9CA3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C1675C6-2ED4-4DD7-9210-2E4D74F9CA3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DCA6CFE-B16E-4B78-BD8F-43D4B5F8BA10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DCA6CFE-B16E-4B78-BD8F-43D4B5F8BA10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DCA6CFE-B16E-4B78-BD8F-43D4B5F8BA10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DCA6CFE-B16E-4B78-BD8F-43D4B5F8BA10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5016104C-DF8A-44D7-ABA8-6C57E5E2F5F2}
+	EndGlobalSection
+EndGlobal
