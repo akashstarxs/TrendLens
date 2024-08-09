@@ -1,53 +1,21 @@
-﻿namespace TrendLens.Client.ApiHandles
-{
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Text.Json;
-    using System.Threading.Tasks;
-    using TrendLens.Client.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
+using TrendLens.Client.Entities;
 
+namespace TrendLens.Client.ApiHandles
+{
     public class ApiManager
     {
         private readonly HttpClient _httpClient;
-        private readonly ApiSettingsManager _settingsManager;
-        private ApiServiceSettings _currentSettings;
 
-        public ApiManager(HttpClient httpClient, ApiSettingsManager settingsManager)
+        public ApiManager(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _settingsManager = settingsManager;
         }
 
-        public void Configure(string serviceName)
-        {
-            _currentSettings = _settingsManager.GetSettings(serviceName);
-            if (_currentSettings != null)
-            {
-                _httpClient.BaseAddress = new Uri(_currentSettings.BaseUrl);
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _currentSettings.AuthKey);
-            }
-            else
-            {
-                throw new InvalidOperationException("Service settings not found.");
-            }
-        }
-
-        public async Task<string> GetAsync(string endpoint)
-        {
-            HttpResponseMessage response = await _httpClient.GetAsync(endpoint);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsStringAsync();
-        }
-
-        public async Task<string> PostAsync(string endpoint, HttpContent content)
-        {
-            HttpResponseMessage response = await _httpClient.PostAsync(endpoint, content);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsStringAsync();
-        }
-
-
-        // Method to fetch data from Reddit API and generate post counts per date
         public async Task<Dictionary<DateTime, int>> GetRedditPostCountsAsync(string searchTerm)
         {
             // Define the Reddit API URL for search
@@ -100,8 +68,5 @@
             var dateTime = dateTimeOffset.DateTime;
             return dateTime.Date; // Only return the date part
         }
-
-
     }
-
 }

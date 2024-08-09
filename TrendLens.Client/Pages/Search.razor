@@ -1,6 +1,5 @@
-﻿@page "/"
+﻿@page "/search"
 @using TrendLens.Client.ApiHandles
-
 @inject ApiManager ApiManager
 
 <div class="container mt-5">
@@ -30,14 +29,7 @@
             {
                 <div class="mt-4">
                     <h4>Results for: <strong>@searchQuery</strong></h4>
-                    <ul class="list-group">
-                        @foreach (var entry in searchResults)
-                        {
-                            <li class="list-group-item">
-                                <strong>@entry.Key: yyyy-MM-dd</strong> - @entry.Value posts
-                            </li>
-                        }
-                    </ul>
+                    <!-- Display search results here -->
                 </div>
             }
         </div>
@@ -54,7 +46,7 @@
         isLoading = true;
         try
         {
-            // Call the ApiManager to fetch data from Reddit
+            // Use the injected ApiManager to perform the search
             searchResults = await ApiManager.GetRedditPostCountsAsync(searchQuery);
         }
         catch (Exception ex)
@@ -65,13 +57,6 @@
         finally
         {
             isLoading = false;
-        }
-        if(searchResults!=null)
-        {
-            foreach (var entry in searchResults)
-            {
-                Console.WriteLine($"{entry.Key}: {entry.Value}");
-            }
         }
     }
 }
